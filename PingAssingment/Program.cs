@@ -69,15 +69,22 @@ namespace PingAssingment
             List<string> ipAddresses = new List<string>();
 
             #region Read IP Addresses from File
-            string filename = args[0];
-            StreamReader reader = new StreamReader(filename);
-
-            while(!reader.EndOfStream)
+            try
             {
-                ipAddresses.Add(reader.ReadLine());
+                string filename = args[0];
+                StreamReader reader = new StreamReader(filename);
+
+                while (!reader.EndOfStream)
+                {
+                    ipAddresses.Add(reader.ReadLine());
+                }
+
+                reader.Close();
+            } catch (Exception)
+            {
+                Console.WriteLine("Error during reading from file!");
             }
 
-            reader.Close();
             #endregion
 
             //Task.WhenAll(ipAddresses.Select(address => doTask(address)));
